@@ -1,0 +1,21 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: 1 #TODO check if there's a way to make load balancer work with kubectl port-forward
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: guanw0826/kubernetes-backend-redis:latest
+          env:
+            - name: ENV
+              value: PRODUCTION
